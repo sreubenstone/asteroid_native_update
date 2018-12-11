@@ -9,6 +9,8 @@ import {
     View
 } from 'react-native';
 
+array = []
+
 export default class GyroscopeSensor extends React.Component {
     state = {
         gyroscopeData: {},
@@ -16,10 +18,16 @@ export default class GyroscopeSensor extends React.Component {
 
     componentDidMount() {
         this._toggle();
+        Gyroscope.setUpdateInterval(1000);
     }
 
     componentWillUnmount() {
         this._unsubscribe();
+    }
+
+    updateArray = (input) => {
+        array.push(input);
+        console.log('array:', array)
     }
 
     _toggle = () => {
@@ -30,13 +38,7 @@ export default class GyroscopeSensor extends React.Component {
         }
     }
 
-    _slow = () => {
-        Gyroscope.setUpdateInterval(1000);
-    }
 
-    _fast = () => {
-        Gyroscope.setUpdateInterval(16);
-    }
 
     _subscribe = () => {
         this._subscription = Gyroscope.addListener((result) => {
@@ -51,26 +53,14 @@ export default class GyroscopeSensor extends React.Component {
 
     render() {
         let { x, y, z } = this.state.gyroscopeData;
-
+        this.updateArray(x)
         return (
             <View style={styles.sensor}>
                 <Text>Gyroscope:</Text>
                 <Text>x: {round(x)} y: {round(y)} z: {round(z)}</Text>
-
-                <View style={styles.buttonContainer}>
-                    <TouchableOpacity onPress={this._toggle} style={styles.button}>
-                        <Text>Toggle</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={this._slow} style={[styles.button, styles.middleButton]}>
-                        <Text>Slow</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={this._fast} style={styles.button}>
-                        <Text>Fast</Text>
-                    </TouchableOpacity>
-                </View>
             </View>
         );
-    }
+    };
 }
 
 function round(n) {
@@ -80,6 +70,7 @@ function round(n) {
 
     return Math.floor(n * 100) / 100;
 }
+
 
 const styles = StyleSheet.create({
     container: {

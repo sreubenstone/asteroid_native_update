@@ -27,33 +27,43 @@ export default class App extends React.Component {
     this.setState({ input: !this.state.input })
   }
 
+  setTim = () => {
+    setTimeout(() => {
+      this.setState({ input: false });
+    }, 10000);
+  }
+
   render() {
+    console.log('state:', this.state)
     return (
-      <View>
+      <View style={styles.container}>
         {(this.state.input === false) ?
           <View style={styles.container}>
             <Button
               onPress={() => {
                 console.log('PRESSED BUTTON');
                 this.toggleState();
+                this.setTim();
               }}
               title="Get Horoscope"
               color="#841584"
               accessibilityLabel="Learn more about this purple button"
             />
-            <Text>Click the button above to see your future.</Text>
+            <Text>Click the button above to see your futureee.</Text>
           </View>
 
-          : <View> <Gyro /> <Button
-            onPress={() => {
-              console.log('PRESSED BUTTON');
-              this.toggleState();
-            }}
-            title="Get Horoscope"
-            color="#841584"
-            accessibilityLabel="Learn more about this purple button"
-          />
-          </View>
+          : <Gyro />
+
+          // : <View><Button
+          //   onPress={() => {
+          //     console.log('PRESSED BUTTON');
+          //     this.toggleState();
+          //   }}
+          //   title="Get Horoscope"
+          //   color="#841584"
+          //   accessibilityLabel="Learn more about this purple button"
+          // />
+          // </View>
         }
 
       </View>
