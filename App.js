@@ -19,20 +19,43 @@ const fakeInput = [1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1
 
 export default class App extends React.Component {
 
+  state = {
+    input: false
+  }
+
+  toggleState = () => {
+    this.setState({ input: !this.state.input })
+  }
+
   render() {
     return (
-      <View style={styles.container}>
-        <Gyro />
-        <Button
-          onPress={() => {
-            console.log('PRESSED BUTTON');
-            getAsteroids(fakeInput);
-          }}
-          title="Get Horoscope"
-          color="#841584"
-          accessibilityLabel="Learn more about this purple button"
-        />
-        <Text>Click the button above to see your future.</Text>
+      <View>
+        {(this.state.input === false) ?
+          <View style={styles.container}>
+            <Button
+              onPress={() => {
+                console.log('PRESSED BUTTON');
+                this.toggleState();
+              }}
+              title="Get Horoscope"
+              color="#841584"
+              accessibilityLabel="Learn more about this purple button"
+            />
+            <Text>Click the button above to see your future.</Text>
+          </View>
+
+          : <View> <Gyro /> <Button
+            onPress={() => {
+              console.log('PRESSED BUTTON');
+              this.toggleState();
+            }}
+            title="Get Horoscope"
+            color="#841584"
+            accessibilityLabel="Learn more about this purple button"
+          />
+          </View>
+        }
+
       </View>
     );
   }
