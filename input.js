@@ -9,7 +9,7 @@ import {
     TouchableOpacity,
     View
 } from 'react-native';
-const getAsteroids = require('./asteroid')
+
 
 array = []
 
@@ -29,8 +29,16 @@ export default class GyroscopeSensor extends React.Component {
     }
 
     updateArray = (input) => {
-        array.push(input);
-        console.log('array:', array)
+        if (input.x > 0 && input.y > 0) {
+            array.push(1);
+        } else if (input.x < 0 && input.y < 0) {
+            array.push(2);
+
+        } else if (input.x > 0 && input.y < 0) {
+            array.push(3);
+        } else {
+            array.push(4)
+        }
     }
 
     _toggle = () => {
@@ -40,7 +48,6 @@ export default class GyroscopeSensor extends React.Component {
             this._subscribe();
         }
     }
-
 
 
     _subscribe = () => {
@@ -56,7 +63,7 @@ export default class GyroscopeSensor extends React.Component {
 
     render() {
         let { x, y, z } = this.state.gyroscopeData;
-        this.updateArray(x)
+        this.updateArray(this.state.gyroscopeData)
         return (
             <View style={styles.sensor}>
                 <Text>Gyroscope:</Text>

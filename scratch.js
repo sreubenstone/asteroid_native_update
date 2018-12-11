@@ -1,7 +1,6 @@
 /*
 on click of button in app.js
-    - instigate 5 second set time out -- call back sets it back to false
-    - update input
+    - I need to call getasteroids(array) when 10 seconds passes
 
 
 
