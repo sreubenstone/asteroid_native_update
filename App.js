@@ -15,12 +15,14 @@ import {
 } from 'react-native';
 const getAsteroids = require('./asteroid')
 
+
 const fakeInput = [1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2,]
 
 export default class App extends React.Component {
 
   state = {
-    input: false
+    input: false,
+    data: []
   }
 
   toggleState = () => {
@@ -31,6 +33,10 @@ export default class App extends React.Component {
     setTimeout(() => {
       this.setState({ input: false });
     }, 10000);
+  }
+
+  updateData = (array) => {
+    this.setState({ data: array }, () => getAsteroids(this.state.data))
   }
 
   render() {
@@ -52,7 +58,7 @@ export default class App extends React.Component {
             <Text>Click the button above to see your futureee.</Text>
           </View>
 
-          : <Gyro />
+          : <Gyro funky={this.updateData} />
 
           // : <View><Button
           //   onPress={() => {

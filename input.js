@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {
     Gyroscope,
 } from 'expo';
@@ -8,6 +9,7 @@ import {
     TouchableOpacity,
     View
 } from 'react-native';
+const getAsteroids = require('./asteroid')
 
 array = []
 
@@ -23,6 +25,7 @@ export default class GyroscopeSensor extends React.Component {
 
     componentWillUnmount() {
         this._unsubscribe();
+        this.props.funky(array)
     }
 
     updateArray = (input) => {
@@ -58,6 +61,7 @@ export default class GyroscopeSensor extends React.Component {
             <View style={styles.sensor}>
                 <Text>Gyroscope:</Text>
                 <Text>x: {round(x)} y: {round(y)} z: {round(z)}</Text>
+                <Text>Astroscope is currently feeling your rhythms...</Text>
             </View>
         );
     };
