@@ -1,10 +1,18 @@
 import React from 'react';
 import Gyro from './input';
+import ApolloClient from "apollo-boost";
+import { ApolloProvider } from "react-apollo";
+import Sender from './sender';
+
+
+
+
 import {
   Gyroscope,
 } from 'expo';
 import {
   Image,
+  FlatList,
   Button,
   Platform,
   ScrollView,
@@ -18,7 +26,9 @@ import {
 const executeHoroscope = require('./algo')
 const horoscopes = require('./horoscopes');
 
-
+const client = new ApolloClient({
+  uri: "https://a88508b5.ngrok.io/graphql"
+});
 
 export default class App extends React.Component {
 
@@ -70,46 +80,50 @@ export default class App extends React.Component {
       })
   }
 
+  reset = () => {
+    this.setState({
+      input: false,
+      data: [],
+      horoscope: false,
+      horo_data: ''
+    })
+  }
+
   render() {
     console.log('state:', this.state)
     return (
-      <View style={styles.container}>
-        {(this.state.input === false) ?
-          <View style={styles.container}>
-            <Button
-              onPress={() => {
-                console.log('PRESSED BUTTON');
-                this.toggleState();
-                this.setTim();
-              }}
-              title="Get Horoscope"
-              color="#841584"
-              accessibilityLabel="Learn more about this purple button"
-            />
-            <Text>Click the button above to see your futureee.</Text>
-          </View>
-          : <Gyro funky={this.updateData} />
-        }
+      <ApolloProvider client={client}>
+        <View style={styles.container}>
 
-        {(this.state.horoscope === true) ?
-          <View style={styles.container}>
-            <Text>{this.state.horo_data}</Text>
-            <Button
-              onPress={() => {
 
-              }}
-              title="Send detailed horoscope"
-              color="#841584"
-              accessibilityLabel="Learn more about this purple button"
-            />
-            <TextInput
-              style={{ height: 40, width: 150, borderColor: 'gray', borderWidth: 1 }}
-              onChangeText={(text) => this.setState({ text })}
-              value={this.state.text}
-              keyboardType="number-pad"
-            />
-          </View> : null}
-      </View>
+          {(this.state.input === false) ?
+
+            <View style={styles.container}>
+              <Image source={require('./meteorite.png')} style={{ width: 80, height: 80 }} />
+              <Button
+                onPress={() => {
+                  console.log('PRESSED BUTTON');
+                  this.toggleState();
+                  this.setTim();
+                }}
+                title="Get Horoscope"
+                color="#841584"
+                accessibilityLabel="Learn more about this purple button"
+              />
+
+              <Text>Click the button above to see your future.</Text>
+              <Text> </Text>
+              <Text>1. AstroScope tracks your motions for 10 seconds.</Text>
+              <Text>2. AstroScope checks the nearest 7 space objects to Earth through Nasa's Live API.</Text>
+              <Text>3. AstroScope's ancient formula predicts your future.</Text>
+            </View>
+            : <Gyro funky={this.updateData} />
+          }
+
+          {(this.state.horoscope === true) ?
+            <Sender message={this.state.horo_data} reset={this.reset} /> : null}
+        </View>
+      </ApolloProvider>
     );
   }
 }
@@ -120,6 +134,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'flex-start',
+    justifyContent: 'center',
   },
 });

@@ -5,6 +5,7 @@ import {
 } from 'expo';
 import {
     StyleSheet,
+    Image,
     Text,
     TouchableOpacity,
     View
@@ -66,9 +67,14 @@ export default class GyroscopeSensor extends React.Component {
         this.updateArray(this.state.gyroscopeData)
         return (
             <View style={styles.sensor}>
-                <Text>Gyroscope:</Text>
-                <Text>x: {round(x)} y: {round(y)} z: {round(z)}</Text>
+
+                <Image source={require('./meteor.png')} style={{ width: 80, height: 80 }} />
                 <Text>Astroscope is currently feeling your rhythms...</Text>
+                <Text> </Text>
+                <Text> </Text>
+                <Text>Gyroscopic Reading: x: {round(x)} y: {round(y)} z: {round(z)}</Text>
+
+
             </View>
         );
     };
