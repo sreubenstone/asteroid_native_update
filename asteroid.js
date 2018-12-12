@@ -22,9 +22,9 @@ getAsteroids = async (input) => {
         // console.log(asteroids)
         const h = executeHoroscope(input, asteroids)
         console.log('horoscope h:', h)
-        // const horoscope = horoscopes[h].body
-        //console.log(horoscope)
-
+        const horoscope = horoscopes[h].body
+        console.log(horoscope)
+        return horoscope
         // Collect Digits
 
         // SMS the horoscope -- same thing creates 7 digit array..global variable...accessed by twilio
