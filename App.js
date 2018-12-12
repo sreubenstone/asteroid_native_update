@@ -12,6 +12,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  TextInput,
 } from 'react-native';
 // const getAsteroids = require('./asteroid')
 const executeHoroscope = require('./algo')
@@ -92,8 +93,22 @@ export default class App extends React.Component {
 
         {(this.state.horoscope === true) ?
           <View style={styles.container}>
-            <Text>{this.state.horo_data}</Text></View> : null}
+            <Text>{this.state.horo_data}</Text>
+            <Button
+              onPress={() => {
 
+              }}
+              title="Send detailed horoscope"
+              color="#841584"
+              accessibilityLabel="Learn more about this purple button"
+            />
+            <TextInput
+              style={{ height: 40, width: 150, borderColor: 'gray', borderWidth: 1 }}
+              onChangeText={(text) => this.setState({ text })}
+              value={this.state.text}
+              keyboardType="number-pad"
+            />
+          </View> : null}
       </View>
     );
   }
@@ -105,6 +120,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
   },
 });
