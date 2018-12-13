@@ -67,14 +67,18 @@ export default class GyroscopeSensor extends React.Component {
         this.updateArray(this.state.gyroscopeData)
         return (
             <View style={styles.sensor}>
-
-                <Image source={require('./meteor.png')} style={{ width: 80, height: 80 }} />
-                <Text>Astroscope is currently feeling your rhythms...</Text>
+                <View style={styles.grid}>
+                    <Image source={require('./meteor.png')} style={{ width: 101, height: 101 }} />
+                </View>
+                <Text> </Text>
+                <Text>AstroScope is currently feeling your rhythms...MOVE your body (and the phone)!</Text>
                 <Text> </Text>
                 <Text> </Text>
-                <Text>Gyroscopic Reading: x: {round(x)} y: {round(y)} z: {round(z)}</Text>
-
-
+                <Text>Gyroscopic Reading:</Text>
+                <Text> </Text>
+                <View style={styles.text}>
+                    <Text style={styles.text}>x: {round(x)} y: {round(y)} z: {round(z)}</Text>
+                </View>
             </View>
         );
     };
@@ -92,6 +96,15 @@ function round(n) {
 const styles = StyleSheet.create({
     container: {
         flex: 1
+    },
+    grid: {
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    text: {
+        fontSize: 25,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     buttonContainer: {
         flexDirection: 'row',

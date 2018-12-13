@@ -3,17 +3,13 @@ import Gyro from './input';
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "react-apollo";
 import Sender from './sender';
-
-
-
-
+import { Button } from 'react-native-elements';
 import {
   Gyroscope,
 } from 'expo';
 import {
   Image,
   FlatList,
-  Button,
   Platform,
   ScrollView,
   StyleSheet,
@@ -98,24 +94,39 @@ export default class App extends React.Component {
 
           {(this.state.input === false) ?
 
-            <View style={styles.container}>
+            <View style={styles.grid}>
               <Image source={require('./meteorite.png')} style={{ width: 80, height: 80 }} />
+              <Text> </Text>
               <Button
                 onPress={() => {
                   console.log('PRESSED BUTTON');
                   this.toggleState();
                   this.setTim();
                 }}
-                title="Get Horoscope"
+                title="Get My AstroScope"
+                buttonStyle={{
+                  backgroundColor: "rgba(92, 99,216, 1)",
+                  width: 250,
+                  height: 40,
+                  borderColor: "transparent",
+                  borderWidth: 0,
+                  borderRadius: 5
+                }}
                 color="#841584"
                 accessibilityLabel="Learn more about this purple button"
               />
-
-              <Text>Click the button above to see your future.</Text>
               <Text> </Text>
-              <Text>1. AstroScope tracks your motions for 10 seconds.</Text>
-              <Text>2. AstroScope checks the nearest 7 space objects to Earth through Nasa's Live API.</Text>
-              <Text>3. AstroScope's ancient formula predicts your future.</Text>
+              <View >
+                <View styles={styles.decor} >
+                  <Text >        (Click the button above to see your future)</Text>
+                </View>
+                <Text> </Text>
+                <Text>1. AstroScope tracks your motions for 10 seconds.</Text>
+                <Text> </Text>
+                <Text>2. AstroScope checks the nearest 7 space objects to Earth through Nasa's Live API.</Text>
+                <Text> </Text>
+                <Text>3. AstroScope's ancient formula predicts your future based on your movements and nearest asteroids to Earth.</Text>
+              </View>
             </View>
             : <Gyro funky={this.updateData} />
           }
@@ -133,7 +144,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     justifyContent: 'center',
+    margin: 25
   },
+  grid: {
+    alignItems: 'center'
+  },
+  decor: {
+    justifyContent: 'center',
+  }
 });
