@@ -23,7 +23,7 @@ const executeHoroscope = require('./algo')
 const horoscopes = require('./horoscopes');
 
 const client = new ApolloClient({
-  uri: "https://a88508b5.ngrok.io/graphql"
+  uri: "https://53d547ed.ngrok.io/graphql"
 });
 
 export default class App extends React.Component {
@@ -32,7 +32,8 @@ export default class App extends React.Component {
     input: false,
     data: [],
     horoscope: null,
-    horo_data: ''
+    horo_data: '',
+    name: '',
   }
 
   getAsteroids = async (input) => {
@@ -47,11 +48,11 @@ export default class App extends React.Component {
       const keyArray = Object.keys(fixedNative.near_earth_objects)
       const key1 = keyArray[0]
       const asteroids = fixedNative.near_earth_objects[key1]
-      const h = executeHoroscope(input, asteroids)
-      console.log('horoscope h:', h)
+      const ho = executeHoroscope(input, asteroids)
+      const h = ho.h
       const horoscope = horoscopes[h].body
       console.log('horo in app.js:', horoscope)
-      this.setState({ horoscope: true, horo_data: horoscope })
+      this.setState({ horoscope: true, horo_data: horoscope, name: ho.name })
 
     } catch (error) {
       console.log(error)
@@ -87,7 +88,7 @@ export default class App extends React.Component {
 
   render() {
     console.log('state:', this.state)
-    const sms_body = `Horoscope: ${this.horo_data}. `
+    const sms_body = `Horoscope: ${this.state.horo_data}. Your asteroid's name: ${this.state.name} -- AstroScope`
     return (
       <ApolloProvider client={client}>
         <View style={styles.container}>
@@ -134,7 +135,7 @@ export default class App extends React.Component {
           }
 
           {(this.state.horoscope === true) ?
-            <Sender message={sms_body} reset={this.reset} /> : null}
+            <Sender horo={this.state.horo_data} message={sms_body} reset={this.reset} /> : null}
         </View>
       </ApolloProvider>
     );

@@ -26,23 +26,24 @@ export default class sender extends React.Component {
             <Mutation mutation={SEND} >
                 {sendSMS => (
                     <View style={styles.container}>
-                        <Image source={require('./meteorite.png')} style={{ width: 80, height: 80 }} />
-
+                        <View style={{ alignSelf: 'center' }}>
+                            <Image style={{ alignItems: 'center' }} source={require('./meteorite.png')} style={{ width: 80, height: 80 }} />
+                        </View>
                         <View style={styles.grid}>
                             <Text style={styles.header} >    My AstroScope</Text>
                         </View>
                         <Text> </Text>
                         <View styles={styles.grid}>
-                            <Text style={styles.text}>{this.props.message}</Text>
+                            <Text style={styles.text}>{this.props.horo}</Text>
                             <Text> </Text>
                             <TextInput
-                                style={{ height: 40, width: 250, borderColor: 'gray', borderWidth: 1, borderRadius: 5 }}
+                                style={{ height: 40, width: 250, borderColor: 'gray', borderWidth: 1, borderRadius: 5, alignSelf: 'center' }}
                                 onChangeText={(text) => this.setState({ text })}
                                 // value={this.state.text}
                                 keyboardType="number-pad"
                             />
                             <Text> </Text>
-                            <Text> (enter your number)</Text>
+                            <Text style={{ alignSelf: 'center' }}>(enter your number)</Text>
                         </View>
                         <Text> </Text>
                         <Button
@@ -63,11 +64,11 @@ export default class sender extends React.Component {
                             accessibilityLabel="Learn more about this purple button"
                             placeholder='enter your number here'
                         />
-
+                        <Text> </Text>
                         <Text> What you will receive:</Text>
-                        <Text> - Information on your Gyro </Text>
-                        <Text> - Information on your Space Objects</Text>
-                        <Text> - Complete life clarity </Text>
+                        <Text> - Information on your Gyroscopic readings. </Text>
+                        <Text> - Information on your Space Objects.</Text>
+                        <Text> - Complete life clarity. </Text>
                         <Text> </Text>
                         <Text> </Text>
                         <Text> </Text>
@@ -78,22 +79,27 @@ export default class sender extends React.Component {
                         <Text> </Text>
                         <Text> </Text>
                         <Text> </Text>
-                        <Button
-                            onPress={() => {
-                                this.props.reset()
-                            }}
-                            title="reset"
-                            buttonStyle={{
-                                backgroundColor: 'gray',
-                                width: 55,
-                                height: 30,
-                                borderColor: "transparent",
-                                borderWidth: 0,
-                                borderRadius: 5
-                            }}
-                            color="#841584"
-                            accessibilityLabel="Learn more about this purple button"
-                        />
+                        <Text> </Text>
+                        <Text> </Text>
+                        <Text> </Text>
+                        <View style={{ alignSelf: 'flex-end' }}>
+                            <Button
+                                onPress={() => {
+                                    this.props.reset()
+                                }}
+                                title="reset"
+                                buttonStyle={{
+                                    backgroundColor: 'grey',
+                                    width: 55,
+                                    height: 30,
+                                    borderColor: "transparent",
+                                    borderWidth: 0,
+                                    borderRadius: 5
+                                }}
+                                color="#841584"
+                                accessibilityLabel="Learn more about this purple button"
+                            />
+                        </View>
                     </View>
                 )}
             </Mutation>
@@ -111,8 +117,7 @@ const styles = StyleSheet.create({
         margin: 25
     },
     grid: {
-        alignItems: 'center',
-        justifyContent: 'center',
+        alignContent: 'center'
     },
     decor: {
         justifyContent: 'center',
@@ -121,7 +126,8 @@ const styles = StyleSheet.create({
         fontSize: 25,
         color: '#B63B7B',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        alignSelf: 'center'
     },
     header: {
         fontSize: 35,

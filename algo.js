@@ -5,10 +5,11 @@ const executeHoroscope = (input, asteroids) => {
 
     const asteroid = input[2] * 1 - 1
     const i = asteroids[asteroid]
+    console.log('here is user asteroid:', i.name)
+    const name = i.name
 
-    console.log('here is item:', asteroid)
     const diameter = i.estimated_diameter.meters.estimated_diameter_max
-    console.log('diam here:', diameter)
+
     const diameter_string = diameter.toString()
     const lastchar_diamater = diameter_string[diameter_string.length - 1];
 
@@ -41,7 +42,12 @@ const executeHoroscope = (input, asteroids) => {
     const lastChar_multiply = multiply_string[multiply_string.length - 1]
     const horo = parseInt(lastChar_multiply, 10)
 
-    return horo
+    const answer = {
+        h: horo,
+        name: i.name
+    }
+
+    return answer
 
 }
 

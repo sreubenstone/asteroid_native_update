@@ -7,7 +7,7 @@ getAsteroids = async (input) => {
 
     try {
         const asteroidsData = await fetch(
-            'https://api.nasa.gov/neo/rest/v1/feed/today?detailed=false&api_key=DEMO_KEY',
+            'https://api.nasa.gov/neo/rest/v1/feed/today?detailed=false&api_key=ZcJiqnQ5fduKfIMwn4G9ADaAqf0oplwMZ1twmOd3',
         );
         // console.log('asteroid data:', asteroidsData)
         const fixedNative = JSON.parse(asteroidsData._bodyInit)
