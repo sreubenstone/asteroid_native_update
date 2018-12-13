@@ -31,7 +31,7 @@ export default class App extends React.Component {
   state = {
     input: false,
     data: [],
-    horoscope: false,
+    horoscope: null,
     horo_data: ''
   }
 
@@ -80,59 +80,61 @@ export default class App extends React.Component {
     this.setState({
       input: false,
       data: [],
-      horoscope: false,
+      horoscope: null,
       horo_data: ''
     })
   }
 
   render() {
     console.log('state:', this.state)
+    const sms_body = `Horoscope: ${this.horo_data}. `
     return (
       <ApolloProvider client={client}>
         <View style={styles.container}>
 
+          {(this.state.horoscope === null) ?
 
-          {(this.state.input === false) ?
+            (this.state.input === false) ?
 
-            <View style={styles.grid}>
-              <Image source={require('./meteorite.png')} style={{ width: 80, height: 80 }} />
-              <Text> </Text>
-              <Button
-                onPress={() => {
-                  console.log('PRESSED BUTTON');
-                  this.toggleState();
-                  this.setTim();
-                }}
-                title="Get My AstroScope"
-                buttonStyle={{
-                  backgroundColor: "rgba(92, 99,216, 1)",
-                  width: 250,
-                  height: 40,
-                  borderColor: "transparent",
-                  borderWidth: 0,
-                  borderRadius: 5
-                }}
-                color="#841584"
-                accessibilityLabel="Learn more about this purple button"
-              />
-              <Text> </Text>
-              <View >
-                <View styles={styles.decor} >
-                  <Text >        (Click the button above to see your future)</Text>
+              <View style={styles.grid}>
+                <Image source={require('./meteorite.png')} style={{ width: 80, height: 80 }} />
+                <Text> </Text>
+                <Button
+                  onPress={() => {
+                    console.log('PRESSED BUTTON');
+                    this.toggleState();
+                    this.setTim();
+                  }}
+                  title="Get My AstroScope"
+                  buttonStyle={{
+                    backgroundColor: "rgba(92, 99,216, 1)",
+                    width: 250,
+                    height: 40,
+                    borderColor: "transparent",
+                    borderWidth: 0,
+                    borderRadius: 5
+                  }}
+                  color="#841584"
+                  accessibilityLabel="Learn more about this purple button"
+                />
+                <Text> </Text>
+                <View >
+                  <View styles={styles.decor} >
+                    <Text >        (Click the button above to see your future)</Text>
+                  </View>
+                  <Text> </Text>
+                  <Text>1. AstroScope tracks your motions for 10 seconds.</Text>
+                  <Text> </Text>
+                  <Text>2. AstroScope checks the nearest 7 space objects to Earth through Nasa's Live API.</Text>
+                  <Text> </Text>
+                  <Text>3. AstroScope's ancient formula predicts your future based on your movements and nearest asteroids to Earth.</Text>
                 </View>
-                <Text> </Text>
-                <Text>1. AstroScope tracks your motions for 10 seconds.</Text>
-                <Text> </Text>
-                <Text>2. AstroScope checks the nearest 7 space objects to Earth through Nasa's Live API.</Text>
-                <Text> </Text>
-                <Text>3. AstroScope's ancient formula predicts your future based on your movements and nearest asteroids to Earth.</Text>
               </View>
-            </View>
-            : <Gyro funky={this.updateData} />
+              : <Gyro funky={this.updateData} /> : null
           }
 
           {(this.state.horoscope === true) ?
-            <Sender message={this.state.horo_data} reset={this.reset} /> : null}
+            <Sender message={sms_body} reset={this.reset} /> : null}
         </View>
       </ApolloProvider>
     );

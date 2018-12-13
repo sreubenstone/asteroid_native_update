@@ -79,6 +79,10 @@ export default class GyroscopeSensor extends React.Component {
                 <View style={styles.text}>
                     <Text style={styles.text}>x: {round(x)} y: {round(y)} z: {round(z)}</Text>
                 </View>
+                <Text> </Text>
+                <Text> </Text>
+                <Text> </Text>
+                <Text> ...contacting Nasa</Text>
             </View>
         );
     };
