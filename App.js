@@ -23,7 +23,7 @@ const executeHoroscope = require('./algo')
 const horoscopes = require('./horoscopes');
 
 const client = new ApolloClient({
-  uri: "https://53d547ed.ngrok.io/graphql"
+  uri: "https://asteroid-back.herokuapp.com/graphql"
 });
 
 export default class App extends React.Component {
@@ -41,7 +41,7 @@ export default class App extends React.Component {
 
     try {
       const asteroidsData = await fetch(
-        'https://api.nasa.gov/neo/rest/v1/feed/today?detailed=false&api_key=DEMO_KEY',
+        'https://api.nasa.gov/neo/rest/v1/feed/today?detailed=false&api_key=ZcJiqnQ5fduKfIMwn4G9ADaAqf0oplwMZ1twmOd3',
       );
 
       const fixedNative = JSON.parse(asteroidsData._bodyInit)
@@ -121,7 +121,7 @@ export default class App extends React.Component {
                 <Text> </Text>
                 <View >
                   <View styles={styles.decor} >
-                    <Text >        (Click the button above to see your future)</Text>
+                    <Text >         (Click the button above to see your future)</Text>
                   </View>
                   <Text> </Text>
                   <Text>1. AstroScope tracks your motions for 10 seconds.</Text>
@@ -130,6 +130,23 @@ export default class App extends React.Component {
                   <Text> </Text>
                   <Text>3. AstroScope's ancient formula predicts your future based on your movements and nearest asteroids to Earth.</Text>
                 </View>
+                <Text> </Text>
+                <Text> </Text>
+                <Text> </Text>
+                <Text> </Text>
+                <Text> </Text>
+                <Text> </Text>
+                <Text> </Text>
+                <Text> </Text>
+                <Text> </Text>
+                <Text> </Text>
+                <Text> </Text>
+                <Text> </Text>
+                <Text> </Text>
+                <Text> </Text>
+                <Text> </Text>
+                <Text> </Text>
+                <Text> an SR creation</Text>
               </View>
               : <Gyro funky={this.updateData} /> : null
           }

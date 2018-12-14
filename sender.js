@@ -27,6 +27,8 @@ export default class sender extends React.Component {
                 {sendSMS => (
                     <View style={styles.container}>
                         <View style={{ alignSelf: 'center' }}>
+                            <Text> </Text>
+
                             <Image style={{ alignItems: 'center' }} source={require('./meteorite.png')} style={{ width: 80, height: 80 }} />
                         </View>
                         <View style={styles.grid}>
@@ -69,7 +71,7 @@ export default class sender extends React.Component {
                         <Text> - Information on your Gyroscopic readings. </Text>
                         <Text> - Information on your Space Objects.</Text>
                         <Text> - Complete life clarity. </Text>
-                        <Text> </Text>
+
                         <Text> </Text>
                         <Text> </Text>
                         <Text> </Text>
@@ -127,7 +129,10 @@ const styles = StyleSheet.create({
         color: '#B63B7B',
         justifyContent: 'center',
         alignItems: 'center',
-        alignSelf: 'center'
+        alignSelf: 'center',
+        borderWidth: .5,
+        borderRadius: 5,
+        padding: 9,
     },
     header: {
         fontSize: 35,

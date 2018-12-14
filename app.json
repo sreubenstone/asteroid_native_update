@@ -4,15 +4,16 @@
     "slug": "asteroid_native",
     "privacy": "public",
     "sdkVersion": "31.0.0",
+    "description": "Get your AstroScope today.",
     "platforms": [
       "ios",
       "android"
     ],
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/meteor_icon.png",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/astrosplash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -23,7 +24,11 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.stevenreubenstone.astroscope"
+    },
+    "android": {
+      "package": "com.stevenreubenstone.astroscope"
     }
   }
 }
